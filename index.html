@@ -250,16 +250,51 @@
             background: radial-gradient(ellipse 70% 45% at 50% 62%, rgba(255, 236, 214, 0.9) 0%, rgba(255, 236, 214, 0) 70%), linear-gradient(180deg, #fff8f5 0%, #fdeef1 45%, #f9e3ea 75%, #f4dbe4 100%);
             display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; text-align: center; position: relative; overflow: hidden;
         }
+        
         .question-box {
-            background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(15px); padding: 40px 30px; border-radius: 30px;
-            box-shadow: 0 15px 35px rgba(214, 120, 150, 0.25); border: 1px solid rgba(255, 255, 255, 0.9); max-width: 420px; width: 90%; position: relative; z-index: 10;
+            background: rgba(255, 255, 255, 0.45); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+            padding: 70px 40px; border-radius: 40px; 
+            box-shadow: 0 30px 60px rgba(214, 120, 150, 0.25), inset 0 0 0 1px rgba(255, 255, 255, 0.7); 
+            max-width: 650px; width: 90%; position: relative; z-index: 10;
         }
-        .question-box h2 { font-family: 'Pacifico', cursive; color: #cf5b7f; font-size: 32px; margin-bottom: 25px; text-shadow: 0 2px 4px rgba(240, 160, 185, 0.3); }
-        .btn-group { display: flex; justify-content: center; gap: 20px; position: relative; margin-top: 20px; min-height: 60px; align-items: center; }
-        .yes-btn { background: linear-gradient(45deg, #ff4d6d, #ff7eb3); color: white; padding: 14px 35px; font-size: 18px; border: none; border-radius: 20px; font-weight: 900; box-shadow: 0 8px 20px rgba(255, 77, 109, 0.4); cursor: pointer; font-family: inherit; transition: transform 0.2s; }
-        .yes-btn:hover { transform: scale(1.05); }
-        .no-btn { background: #e2d1d6; color: #8a5468; padding: 14px 35px; font-size: 18px; border: none; border-radius: 20px; font-weight: 900; cursor: pointer; font-family: inherit; position: absolute; transition: all 0.2s ease; }
-        #funny-msg { color: #d90429; font-weight: 700; font-size: 15px; margin-top: 15px; min-height: 24px; text-shadow: 0 1px 2px rgba(255,255,255,0.8); }
+
+        .question-box h2 { 
+            font-family: 'Quicksand', sans-serif; font-weight: 500; color: #cf5b7f; font-size: 46px; 
+            margin-bottom: 40px; text-shadow: 0 2px 5px rgba(255, 255, 255, 0.9); line-height: 1.2;
+        }
+
+        .btn-group { 
+            display: flex; justify-content: center; align-items: center; gap: 30px; position: relative; 
+        }
+
+        .yes-btn { 
+            background: rgba(255, 255, 255, 0.65); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            color: #d90429; padding: 22px 60px; font-size: 32px; border: 2px solid rgba(255, 255, 255, 0.8); 
+            border-radius: 50px; font-weight: 800; box-shadow: 0 15px 35px rgba(255, 77, 109, 0.25); 
+            cursor: pointer; font-family: inherit; transition: all 0.3s ease; z-index: 1; 
+        }
+        .yes-btn:hover { 
+            transform: scale(1.08); box-shadow: 0 20px 45px rgba(255, 77, 109, 0.4); background: rgba(255, 255, 255, 0.85);
+        }
+
+        .no-wrapper {
+            display: flex; align-items: center; gap: 12px; position: relative; z-index: 20;
+            transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .no-btn { 
+            background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            color: #8a5468; padding: 14px 30px; font-size: 18px; border: 1px solid rgba(255, 255, 255, 0.6); 
+            border-radius: 30px; font-weight: 700; cursor: pointer; font-family: inherit; 
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); transition: background 0.3s;
+        }
+
+        #funny-msg { 
+            color: #d90429; font-weight: 800; font-size: 15px; text-shadow: 0 1px 2px rgba(255,255,255,0.8); 
+            white-space: nowrap; background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(5px);
+            padding: 8px 15px; border-radius: 15px; opacity: 0; pointer-events: none;
+            box-shadow: 0 5px 15px rgba(214, 120, 150, 0.15);
+        }
 
         /* ================= SLIDE 4: LOVE LETTER ENVELOPE ================= */
         #slide-4 {
@@ -414,10 +449,13 @@
             <div class="question-box">
                 <h2>Are you ready to celebrate?</h2>
                 <div class="btn-group" id="btn-group">
-                    <button class="yes-btn" onclick="goToSlide(4)">Yes 💖</button>
-                    <button class="no-btn" id="no-btn" onmouseover="moveNoBtn()" onclick="moveNoBtn()">No 🙈</button>
+                    <button class="yes-btn" onclick="goToSlide(4)">Yes 😁</button>
+                    <!-- Wrapper for moving button and text together -->
+                    <div class="no-wrapper" id="no-wrapper" onmouseover="moveNoBtn()" onclick="moveNoBtn()">
+                        <button class="no-btn" id="no-btn">No 🥺</button>
+                        <span id="funny-msg"></span>
+                    </div>
                 </div>
-                <div id="funny-msg"></div>
             </div>
         </section>
 
@@ -701,19 +739,31 @@
             "nahi yrr.. yess kro",
             "tum smjhti kyu nahi",
             "yes kro",
-            "nice try...but u can't skip this"
+            "nice try...but u can't skip this",
+            "chup chaap yes dabao",
+            "manjao na 🥺"
         ];
+        const sadEmojis = ["😒", "😔", "😟", "🥺", "😫", "😭", "💔", "🤡"];
         let noClickCount = 0;
+
         function moveNoBtn() {
+            const noWrapper = document.getElementById('no-wrapper');
             const noBtn = document.getElementById('no-btn');
             const msgEl = document.getElementById('funny-msg');
             
-            // Random position shift inside container bounds
-            const x = (Math.random() - 0.5) * 160;
-            const y = (Math.random() - 0.5) * 100;
-            noBtn.style.transform = `translate(${x}px, ${y}px)`;
+            // Random movement within bounds
+            const x = (Math.random() - 0.5) * 350; 
+            const y = (Math.random() - 0.5) * 200; 
+            noWrapper.style.transform = `translate(${x}px, ${y}px)`;
 
+            // Update text and show bubble
             msgEl.textContent = noMessages[noClickCount % noMessages.length];
+            msgEl.style.opacity = 1; 
+            
+            // Change sad emoji dynamically
+            const randomEmoji = sadEmojis[Math.floor(Math.random() * sadEmojis.length)];
+            noBtn.innerHTML = `No ${randomEmoji}`;
+
             noClickCount++;
         }
 
